@@ -21,6 +21,10 @@ pipeline{
             }
         }
         stage("Deploy on Prod"){
+            input{
+                message "Deploy on production?"
+                ok "yes"
+            }
             steps{
                 deploy adapters: [tomcat9(credentialsId: 'tomcat9details', path: '', url: 'http://35.154.182.118:8080')], contextPath: '/app', war: '**/*.war'
             }
